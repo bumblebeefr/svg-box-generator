@@ -4,6 +4,44 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>SVG Boxes for laser cutter generator</title>
+	<style>
+		h1 {
+			font-weight:normal;
+			border-bottom:dotted 1px #CCC;
+		}
+		body {
+			width:600px;
+			margin:auto;
+			font-family: Verdana,"DejaVu Sans","Bitstream Vera Sans",Geneva,sans-serif;
+			font-size:8pt;
+		}
+		fieldset{
+			border:none;
+			border-bottom:dotted 1px #CCC;
+		}
+		fieldset div{
+			margin:0.5em 0;
+		}
+		label span {
+			display:inline-block;	
+			width:33%;
+			text-align:right;
+		}
+		input {
+			border:solid 1px #888888;	
+			width:4em;
+			margin-right:0.5em;
+			text-align:right;
+		}
+		#out{
+			text-align:center;	
+		}
+		#footer{
+			text-align:right;
+			opacity:0.6;
+			font-size:0.8em;
+		}
+	</style>
 </head>
 
 <body>
@@ -25,42 +63,60 @@
 			</g>
 		</svg>
 	</div>
-	<h1>Svg box generator</h1>
-	<div>
-		<label>Largeur :
-			<input type="number" id="width" value="200" />mm</label>
+	<h1>Générateur de boites SVG</h1>
+	<p>
+		<em>
+			Génere les plans d'un boite à la taille souahitée, réalisable à la découpeuse laser, au foramt SVG (inkscape).
+		</em>
+	</p>
+	<fieldset>
+		<div>
+			<label title="Largeur de la boite">
+				<span>Largeur :</span>
+				<input type="number" id="width" value="200" />mm</label>
+		</div>
+		<div>
+			<label title="Profondeur de la boite">
+				<span>Profondeur :</span>
+				<input type="number" id="depth" value="100" />mm</label>
+		</div>
+		<div>
+			<label title="Hauteur de la boite">
+				<span>Hauteur :</span>
+				<input type="number" id="height" value="50" />mm</label>
+		</div>
+		<div title="Épaisseur du materiau utilisé">
+			<label>
+				<span>Épaisseur du materiau :</span>
+				<input type="number" id="thickness" value="3" />mm</label>
+		</div>
+		<div>
+			<label title="Largeur approximative des encoches souhaitées">
+				<span>Largeur des encoches :</span>
+				<input type="number" id="tabs" value="10" />mm</label>
+		</div>
+		<div title="Rattrapage du jeu induit par la largeur du trait de coupe du laser.">
+			<label>
+				<span>Jeu :</span>
+				<input type="number" id="backlash" value="0.1" />mm</label>
+		</div>
+		<div>
+			<label title="Indique si vous souhaitez une boite totalement fermée ou un boite sans haut">
+				<span>Boite fermée :</span>
+				<input type="checkbox" id="closed" />
+			</label>
+		</div>
+		<div>
+			<label>
+				<span></span>
+				<button onclick="generate_box()">Generer la boite</button>
+			</label>
+		</div>
+		<div id="out"></div>
+	</fieldset>
+	<div id="footer">Outil sous licence AGPL - Sources sur
+		<a href="https://github.com/bumblebeefr/svg-box-generator">github</a>
 	</div>
-	<div>
-		<label>Profondeur :
-			<input type="number" id="depth" value="100" />mm</label>
-	</div>
-	<div>
-		<label>Hauteur :
-			<input type="number" id="height" value="50" />mm</label>
-	</div>
-	<div>
-		<label>Epaisseur du materiau :
-			<input type="number" id="thickness" value="3" />mm</label>
-	</div>
-	<div>
-		<label>Largeur des encoches :
-			<input type="number" id="tabs" value="10" />mm</label>
-	</div>
-	<div>
-		<label>Jeu :
-			<input type="number" id="backlash" value="0.1" />mm</label>
-	</div>
-	<div>
-		<label>Boite fermée :
-			<input type="checkbox" id="closed" />
-		</label>
-	</div>
-	<br/>
-	<button onclick="generate_box()">Generer la boite</button>
-	<br/>
-	<br/>
-	<br/>
-	<div id="out"></div>
 	<script src="box_generator.js">
 	</script>
 
