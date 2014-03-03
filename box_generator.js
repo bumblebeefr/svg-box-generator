@@ -122,11 +122,18 @@ var TabTools = {
 };
 var SvgTools = {
 	mm2px: function (arr) {
-		return arr.map(function (point) {
-			return point.map(function (coord) {
-				return coord * 90 / 25.4;
+		console.log(typeof arr);
+		if (typeof arr == 'array' || typeof arr == 'object') {
+			return arr.map(function (point) {
+				return point.map(function (coord) {
+					return coord * 90 / 25.4;
+				});
 			});
-		});
+		}
+		if (typeof arr == 'number') {
+			return arr * 90 / 25.4;
+		}
+
 	},
 
 	toPathString: function (arr) {
@@ -134,11 +141,11 @@ var SvgTools = {
 			return point.join(",")
 		}).join(" ");
 	},
-	addPath: function (str, id) {
+	addPath: function (str, id, _x, _y) {
 		var shape = document.createElement("path");
-		shape.setAttribute("style", "fill:#e3dbdb;stroke:#ff0000");
+		shape.setAttribute("style", "fill:#ffffff;stroke:#ff0000");
 		shape.setAttribute("id", id);
-		shape.setAttribute("transform", "translate(0,10.62992125984252)");
+		shape.setAttribute("transform", "translate(" + SvgTools.mm2px(_x) + "," + (SvgTools.mm2px(_y)) + ")");
 		shape.setAttribute("d", "m " + str + " z");
 		layer.appendChild(shape);
 	},
@@ -313,16 +320,21 @@ var Box = {
 	},
 	withTop: function (width, depth, height, tab_size, thickness, backlash) {
 		SvgTools.clearPathAndLink();
-		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._bottom(width, depth, tab_size, thickness, backlash))), 'bottom');
-		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._front_with_top(width, height, tab_size, thickness, backlash))), 'font');
-		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._side_with_top(depth, height, tab_size, thickness, backlash))), 'left_side');
+		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._bottom(width, depth, tab_size, thickness, backlash))), 'bottom', (1 * thickness), (1 * thickness));
+		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._bottom(width, depth, tab_size, thickness, backlash))), 'top', (2 * thickness + width), (1 * thickness));
+		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._front_with_top(width, height, tab_size, thickness, backlash))), 'font', (2 * thickness + width), (2 * thickness + depth));
+		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._front_with_top(width, height, tab_size, thickness, backlash))), 'back', (1 * thickness), (2 * thickness + depth));
+		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._side_with_top(depth, height, tab_size, thickness, backlash))), 'left_side', (2 * thickness + depth), (3 * thickness + depth + height));
+		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._side_with_top(depth, height, tab_size, thickness, backlash))), 'right_side', (1 * thickness), (3 * thickness + depth + height));
 		SvgTools.downloadLink(width, depth, height, thickness);
 	},
 	withoutTop: function (width, depth, height, tab_size, thickness, backlash) {
 		SvgTools.clearPathAndLink();
-		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._bottom(width, depth, tab_size, thickness, backlash))), 'bottom');
-		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._front_without_top(width, height, tab_size, thickness, backlash))), 'font');
-		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._side_without_top(depth, height, tab_size, thickness, backlash))), 'left_side');
+		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._bottom(width, depth, tab_size, thickness, backlash))), 'bottom', (1 * thickness), (1 * thickness));
+		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._front_without_top(width, height, tab_size, thickness, backlash))), 'font', (2 * thickness + width), (2 * thickness + depth));
+		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._front_without_top(width, height, tab_size, thickness, backlash))), 'back', (1 * thickness), (2 * thickness + depth));
+		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._side_without_top(depth, height, tab_size, thickness, backlash))), 'left_side', (2 * thickness + depth), (3 * thickness + depth + height));
+		SvgTools.addPath(SvgTools.toPathString(SvgTools.mm2px(Box._side_without_top(depth, height, tab_size, thickness, backlash))), 'right_side', (1 * thickness), (3 * thickness + depth + height));
 		SvgTools.downloadLink(width, depth, height, thickness);
 	}
 };
