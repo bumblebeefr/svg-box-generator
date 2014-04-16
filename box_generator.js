@@ -164,7 +164,7 @@ var SvgTools = {
 		var link = document.createElement("a");
 		link.innerHTML = (["⎘ Télécharger le fichier pour une boite de", width, "x", depth, "x", height, "en", thickness, "mm d'epaisseur"].join(" "));
 		link.setAttribute("href", URL.createObjectURL(oMyBlob));
-		link.setAttribute("download", "download");
+		link.setAttribute("download", ["box_", width, "x", depth, "x", height, "_", thickness, "mm.svg"].join(""));
 		out.appendChild(link);
 		link.click();
 	},

@@ -66,39 +66,39 @@
 	<h1>Générateur de boites SVG</h1>
 	<p>
 		<em>
-			Génere les plans d'un boite à la taille souahitée, réalisable à la découpeuse laser, au foramt SVG (inkscape).
+			Génère les plans d'un boite à la taille souhaitée, réalisable à la découpeuse laser, au format SVG (inkscape).
 		</em>
 	</p>
 	<fieldset>
 		<div>
 			<label title="Largeur de la boite">
 				<span>Largeur :</span>
-				<input type="number" id="width" value="200" />mm</label>
+				<input type="text" id="width" value="200" />mm</label>
 		</div>
 		<div>
 			<label title="Profondeur de la boite">
 				<span>Profondeur :</span>
-				<input type="number" id="depth" value="100" />mm</label>
+				<input type="text" id="depth" value="100" />mm</label>
 		</div>
 		<div>
 			<label title="Hauteur de la boite">
 				<span>Hauteur :</span>
-				<input type="number" id="height" value="50" />mm</label>
+				<input type="text" id="height" value="50" />mm</label>
 		</div>
 		<div title="Épaisseur du materiau utilisé">
 			<label>
-				<span>Épaisseur du materiau :</span>
-				<input type="number" id="thickness" value="3" />mm</label>
+				<span>Épaisseur du matériau :</span>
+				<input type="text" id="thickness" value="3" />mm</label>
 		</div>
 		<div>
 			<label title="Largeur approximative des encoches souhaitées">
 				<span>Largeur des encoches :</span>
-				<input type="number" id="tabs" value="10" />mm</label>
+				<input type="text" id="tabs" value="10" />mm</label>
 		</div>
 		<div title="Rattrapage du jeu induit par la largeur du trait de coupe du laser.">
 			<label>
 				<span>Jeu :</span>
-				<input type="number" id="backlash" value="0.1" />mm</label>
+				<input type="text" id="backlash" value="0.1" />mm</label>
 		</div>
 		<div>
 			<label title="Indique si vous souhaitez une boite totalement fermée ou un boite sans haut">
@@ -109,13 +109,13 @@
 		<div>
 			<label>
 				<span></span>
-				<button onclick="generate_box()">Generer la boite</button>
+				<button onclick="generate_box()">Générer la boite</button>
 			</label>
 		</div>
 		<div id="out"></div>
 	</fieldset>
-	<div id="footer">Outil sous licence AGPL - Sources sur
-		<a href="https://github.com/bumblebeefr/svg-box-generator">github</a>
+	<div id="footer">Outil sous licence <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank">AGPLv3</a> - Sources sur
+		<a href="https://github.com/bumblebeefr/svg-box-generator" target="_blank">github</a>
 	</div>
 	<script src="box_generator.js">
 	</script>
